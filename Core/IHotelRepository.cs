@@ -1,7 +1,14 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using TourAgency.Core.Models;
+
 namespace TourAgency.Core
 {
-    public class IHotelRepository
+    public interface IHotelRepository
     {
-        
+        void Add(Hotel hotel);
+        Task<Hotel> GetHotel(int id, bool includeRelated = true);
+        void Remove(Hotel hotel);
+        Task<List<Hotel>> GetHotels();
     }
 }

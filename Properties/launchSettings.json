@@ -15,6 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    
     "TourAgency": {
       "commandName": "Project",
       "launchBrowser": true,

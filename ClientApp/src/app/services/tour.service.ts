@@ -7,9 +7,30 @@ import { map } from 'rxjs/operators';
 })
 export class TourService {
 
+  private readonly toursEndpoint = '/api/tours';
+
   constructor(private httpClient: HttpClient ) { }
 
-  getFeatures() {
-    return this.httpClient.get('/api/tours').pipe(map((res: any) => res.json()));
+  getTours() {
+    return this.httpClient.get(this.toursEndpoint).pipe(map((res: any) => res));
+  }
+
+  getTour(id) {
+    return this.httpClient.get(this.toursEndpoint + '/' + id)
+      .pipe(map((res: any) => res));
+  }
+
+  create(tour) {
+    return this.httpClient.post(this.toursEndpoint, tour).pipe(map((res: any) => res));
+  }
+
+  update(tour) {
+    return this.httpClient.put(this.toursEndpoint + '/' + tour.id, tour)
+      .pipe(map((res: any) => res));
+  }
+
+  delete(id) {
+    return this.httpClient.delete(this.toursEndpoint + '/' + id)
+      .pipe(map((res: any) => res));
   }
 }

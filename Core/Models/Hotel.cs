@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TourAgency.Common.Constant;
 
 namespace TourAgency.Core.Models
 {
@@ -8,15 +9,18 @@ namespace TourAgency.Core.Models
         public int Id { get; set; }
        
        [Required]
-       [StringLength(255)]
+       [MinLength(ModelConstants.TitleMinLength)]
+       [MaxLength(ModelConstants.TitleMaxLength)]
        public string Name { get; set; } 
 
        [Required]
-       [StringLength(255)]
+       [MinLength(ModelConstants.TypeMinLength)]
+       [MaxLength(ModelConstants.TypeMaxLength)]
        public string Type { get; set; } 
 
        [Required]
-       [StringLength(255)]
+       [MinLength(ModelConstants.ContentMinLength)]
+       [MaxLength(ModelConstants.ContentMaxLength)]
        public string Description { get; set; } 
 
        public Country Country {get;set;}

@@ -5,7 +5,7 @@ namespace TourAgency.Core.Models
 {
     public class Sale
     {
-         public int Id { get; set; }
+       public int Id { get; set; }
        
        [Required]
        public DateTime SaleTime { get; set; } 

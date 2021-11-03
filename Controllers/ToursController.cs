@@ -15,21 +15,21 @@ namespace TourAgency.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
-        private readonly TourAgencyDbContext context;
+        private readonly ITourRepository repository;
 
-        public ToursController(TourAgencyDbContext context, IMapper mapper)
+        public ToursController(IMapper mapper, ITourRepository repository, IUnitOfWork unitOfWork)
         {
+            this.unitOfWork = unitOfWork;
+            this.repository = repository;
             this.mapper = mapper;
-            this.context = context;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CountryResource>> GetTours()
+        public async Task<IEnumerable<TourResource>> GetTours()
         {
-        var features = await context.Countries.ToListAsync();
-
-        
-        return mapper.Map<List<Country>, List<CountryResource>>(features); 
+            var tours = await repository.GetTours();
+            
+            return mapper.Map<List<Tour>, List<TourResource>>(tours);
         }
     }
 }

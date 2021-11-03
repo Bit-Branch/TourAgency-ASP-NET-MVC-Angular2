@@ -1,0 +1,40 @@
+<h1>New Hotel</h1>
+<p>
+  {{ hotel | json }}
+</p> 
+<form (ngSubmit)="submit()" novalidate>
+
+  <div class="form-group">
+    <label for="hotelName">Name</label>
+    <input id="hotelName" type="text" class="form-control" [(ngModel)]="hotel.name" name="hotelName" required #hotelName="ngModel">
+    <div class="alert alert-danger" *ngIf="hotelName.touched && !hotelName.valid">Please specify the hotel name.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="hotelType">Type</label>
+    <select id="hotelType" class="form-control" [(ngModel)]="hotel.type"  name="hotelType"  required #hotelType="ngModel">
+      <option value="VIP">VIP</option>
+      <option value="Econom">Econom</option>
+      <!-- <option *ngFor="let t of hotelTypes" value="{{ t.id }}">{{ t.name }}</option> -->
+    </select>
+    <div class="alert alert-danger" *ngIf="hotelType.touched && !hotelType.valid">Please specify the hotelType.</div>
+  </div> 
+
+  <div class="form-group">
+    <label for="country">Country</label>
+    <select id="country" class="form-control" (change)="onCountryChange()" [(ngModel)]="hotel.countryId"  name="countryId" required #countryId="ngModel">
+      <option *ngFor="let c of countries" value="{{ c.id }}">{{ c.name }}</option>
+    </select>
+    <div class="alert alert-danger" *ngIf="countryId.touched && !countryId.valid">Please specify the country.</div>
+  </div> 
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea id="description" type="text" class="form-control" [(ngModel)]="hotel.description" name="description" required #description="ngModel"></textarea>
+    <div class="alert alert-danger" *ngIf="description.touched && !description.valid">Please specify the description.</div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Savevv</button>
+
+  <button *ngIf="hotel.id" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
+</form>

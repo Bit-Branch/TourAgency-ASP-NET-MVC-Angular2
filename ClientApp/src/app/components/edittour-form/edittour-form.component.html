@@ -1,0 +1,74 @@
+<h1>New Tour</h1>
+<p>
+  {{ tour | json }}
+</p>
+<form (ngSubmit)="submit()" novalidate>
+
+  <div class="form-group">
+    <label for="tourName">Name</label>
+    <input id="tourName" type="text" class="form-control" (ngModel)="tour.name" name="tourName" required #tourName="ngModel">
+    <div class="alert alert-danger" *ngIf="tourName.touched && !tourName.valid">Please specify the tour name.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="price">Price</label>
+    <input id="price" type="text" class="form-control" (ngModel)="tour.price" name="price" required #price="ngModel">
+    <div class="alert alert-danger" *ngIf="price.touched && !price.valid">Please specify the price.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="departureDate">Departure Date</label>
+    <input id="departureDate" type="datetime-local" class="form-control" (ngModel)="tour.departureDate" name="departureDate" required #departureDate="ngModel">
+    <div class="alert alert-danger" *ngIf="departureDate.touched && !departureDate.valid">Please specify the departure date.</div>
+  </div>
+
+  <div class="form-group">
+    <label for="departureCity">Departure City</label>
+    <select id="departureCity" class="form-control" (ngModel)="tour.departureCity"  name="departureCity" required #departureCity="ngModel">
+      <option value="Minsk">Minsk</option>
+      <option value="Grodno">Grodno</option>
+      <option value="Gomel">Gomel</option>
+      <option value="Brest">Brest</option>
+      <option value="Vitebsk">Vitebsk</option>
+      <option value="Mogilev">Mogilev</option>
+      <!-- <option *ngFor="let t of hotelTypes" value="{{ t.id }}">{{ t.name }}</option> -->
+    </select>
+    <div class="alert alert-danger" *ngIf="departureCity.touched && !departureCity.valid">Please specify the departure city.</div>
+  </div> 
+
+  <div class="form-group">
+    <label for="hotel">Hotel</label>
+    <select id="hotel" class="form-control" (ngModel)="tour.hotelId"  name="hotel" required #country="ngModel">
+      <option *ngFor="let h of tours" value="{{ h.id }}">{{ h.name }}</option>
+    </select>
+    <div class="alert alert-danger" *ngIf="country.touched && !country.valid">Please specify the country.</div>
+  </div> 
+
+  <div class="form-group">
+    <label for="daysCount">Days Count</label>
+    <select id="daysCount" class="form-control" (ngModel)="tour.daysCount" name="daysCount" required #daysCount="ngModel">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <!-- <option *ngFor="let t of hotelTypes" value="{{ t.id }}">{{ t.name }}</option> -->
+    </select>
+    <div class="alert alert-danger" *ngIf="daysCount.touched && !daysCount.valid">Please specify the departure city.</div>
+  </div> 
+
+  <div class="form-group">
+    <label for="nightsCount">Nights Count</label>
+    <select id="nightsCount" class="form-control" (ngModel)="tour.nightsCount" name="nightsCount" required #nightsCount="ngModel">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <!-- <option *ngFor="let t of hotelTypes" value="{{ t.id }}">{{ t.name }}</option> -->
+    </select>
+    <div class="alert alert-danger" *ngIf="nightsCount.touched && !nightsCount.valid">Please specify the departure city.</div>
+  </div> 
+
+  
+
+  <button class="btn btn-primary">Save</button>
+</form>

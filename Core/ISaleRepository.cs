@@ -1,7 +1,15 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using TourAgency.Core.Models;
+
 namespace TourAgency.Core
 {
-    public class ISaleRepository
+    public interface ISaleRepository
     {
-        
+        Task<List<Sale>> GetSales();
+
+        void Add(Sale sale);
+
+        void Remove(Sale sale);
     }
 }

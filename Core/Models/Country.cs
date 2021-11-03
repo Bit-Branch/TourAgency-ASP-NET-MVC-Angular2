@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TourAgency.Common.Constant;
 
 namespace TourAgency.Core.Models
 {
@@ -10,7 +11,8 @@ namespace TourAgency.Core.Models
         public int Id { get; set; }
        
        [Required]
-       [StringLength(255)]
+       [MinLength(ModelConstants.TitleMinLength)]
+       [MaxLength(ModelConstants.TitleMaxLength)]
        public string Name { get; set; } 
 
        public ICollection<Hotel> Hotels { get; set; }

@@ -17,6 +17,18 @@
   "dependencies": {
     "@angular/compiler": "^12.2.12",
     "@angular/core": "^12.2.12",
+    
+    "@angular/router": "12.2.12",
+    "@angular/common": "12.2.12",
+    "ng2-toasty": "^4.0.3",
     "rxjs": "^7.4.0"
+  },
+  "publishOptions": {
+    "include": [
+      "wwwroot",
+      "**/*.cshtml",
+      "appsettings.json",
+      "web.config"
+    ]
   }
 }

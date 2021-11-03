@@ -1,0 +1,33 @@
+<h2>Sales</h2>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let c of columns">
+        <div *ngIf="c.isSortable" (click)="sortBy(c.key)">
+          {{ c.title }}
+          <i *ngIf="query.sortBy === c.key" 
+            class="fa"
+            [class.fa-sort-asc]="query.isSortAscending"
+            [class.fa-sort-desc]="!query.isSortAscending"
+          ></i>
+        </div>
+        <div *ngIf="!c.isSortable">
+          {{ c.title }}
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of tours">
+      <td>{{ t.id }}</td>
+      <td>{{ t.tour.name }}</td>
+      <td>{{ t.price }}</td>
+      <td>{{ t.saleTime }}</td>
+      <td>
+        <a [routerLink]="['/sales/', v.id]">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

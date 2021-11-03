@@ -30,20 +30,44 @@
 
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/tours/new']"
-              >Create tour</a
+              >Add tour</a
             >
           </li>
 
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
+            <a class="nav-link text-dark" [routerLink]="['/hotels/new']"
+              >Add hotel</a
             >
           </li>
+
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
+            <a class="nav-link text-dark" [routerLink]="['/sales']"
+              >Sales</a
             >
           </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/hotels']"
+              >Hotels</a
+            >
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/tours']"
+              >Tours</a
+            >
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a><!-- <a class="nav-link text-dark" (click)="auth.loginWithPopup()" *ngIf="!auth.authenticated()"> -->
+              <span class="glyphicon glyphicon-user"></span> Login</a>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+           <a> <!-- <a class="nav-link text-dark" (click)="auth.logout()" *ngIf="auth.authenticated()"> -->
+              <span class="glyphicon glyphicon-user"></span> Logout</a>
+          </li>
+        
         </ul>
       </div>
     </div>

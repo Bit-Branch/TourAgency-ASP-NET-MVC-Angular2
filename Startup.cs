@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using TourAgency.Core;
 using TourAgency.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace TourAgency
 {
@@ -23,11 +25,28 @@ namespace TourAgency
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ITourRepository, TourRepository>();
+            services.AddScoped<IHotelRepository, HotelRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<ISaleRepository, SaleRepository>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddDbContext<TourAgencyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
+            services.AddMvc(option => option.EnableEndpointRouting = false);
+
+         /*   services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = "https://dev-tpr8uqzh.us.auth0.com/";
+                options.Audience = "https://api.touragency.com";
+            });*/
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
@@ -52,11 +71,24 @@ namespace TourAgency
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
             }
+
+           // app.UseAuthentication();
+
+           /* app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                name: "default",
+                template: "{controller=Home}/{action=Index}/{id?}");
+            });*/
+
+            app.UseMvc();
+
 
             app.UseRouting();
 
