@@ -17,9 +17,10 @@ export class SalesFormComponent implements OnInit {
 
   columns = [
     { title: 'Id' },
-    { title: 'Tour Name', key: 'tourName', isSortable: true },
-    { title: 'Price', key: 'price', isSortable: true },
-    { title: 'DepartureCity', key: 'departureCity', isSortable: true },
+    { title: 'Buyer Name', key: 'personName', isSortable: true },
+    { title: 'Price', key: 'tourPrice', isSortable: true },
+    { title: 'Count', key: 'count', isSortable: true },
+    { title: 'Sale Time', key: 'saleTime', isSortable: true },
     { }
   ];
 

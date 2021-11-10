@@ -15,13 +15,10 @@ namespace TourAgency.Persistence
         this.context = context;
       }
 
-      public async Task<Tour> GetTour(int id, bool includeRelated = true)
+      public async Task<Tour> GetTour(int id)
       {
-          if (!includeRelated)
-            return await context.Tours.FindAsync(id);
-
           return await context.Tours
-            .Include(v => v.Hotel)
+            .Include(h => h.Hotel)
             .Include(v => v.Sales)
             .SingleOrDefaultAsync(v => v.Id == id);
       }
@@ -38,7 +35,10 @@ namespace TourAgency.Persistence
 
       public async Task<List<Tour>> GetTours()
       {
-        return await context.Tours.ToListAsync();
+        return await context.Tours
+            .Include(h => h.Hotel)
+            .Include(v => v.Sales)
+            .ToListAsync();
       }
     
     }

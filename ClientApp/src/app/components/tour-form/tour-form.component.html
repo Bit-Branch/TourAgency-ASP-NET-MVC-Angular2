@@ -1,0 +1,42 @@
+<h1>{{tour.name}}</h1>
+<form  novalidate>
+
+  <div class="form-group">
+    <label for="tourName"><b>Name</b></label>
+    <p>{{tour.name}}</p>
+    </div>
+
+  <div class="form-group">
+    <label for="price"><b>Price</b></label>
+    <p>{{tour.price}}</p> 
+    </div>
+
+  <div class="form-group">
+    <label for="departureTime"><b>Departure Time</b></label>
+    <p>{{tour.departureTime}}</p> 
+    </div>
+
+  <div class="form-group">
+    <label for="departureCity"><b>Departure City</b></label>
+    <p>{{tour.departureCity}}</p> 
+     </div> 
+
+  <div class="form-group">
+    <label for="hotel"><b>Hotel</b></label>
+    <p>{{tour.hotel.name}}</p> 
+     </div> 
+
+  <div class="form-group">
+    <label for="daysCount"><b>Days Count</b></label>
+    <p>{{tour.daysCount}}</p> 
+     </div> 
+
+  <div class="form-group">
+    <label for="nightsCount"><b>Nights Count</b></label>
+    <p>{{tour.nightsCount}}</p> 
+     </div> 
+
+  <button *ngIf="tour.id" class="btn btn-primary" type="button" (click)="edit()">Edit</button>
+  <button *ngIf="tour.id" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
+  <button *ngIf="tour.id" class="btn btn-secondary" type="button" (click)="buyTour()">Buy</button>
+</form>

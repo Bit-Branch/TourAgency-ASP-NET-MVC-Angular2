@@ -28,5 +28,15 @@ namespace TourAgency.Persistence
             return await context.Countries
                 .SingleOrDefaultAsync(v => v.Id == id);
         }
+
+        public void Add(Country country)
+        {
+            context.Countries.Add(country);
+        }
+
+        public void Remove(Country country)
+        {
+            context.Remove(country);
+        }
     }
 }

@@ -9,8 +9,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AddtourFormComponent implements OnInit {
   countries: any[];
-  tours: any[];
-  tour: any = {};
+  hotels: any[];
+  tour: any = {
+    id: 0,
+    name: '',
+    price: 0,
+    departureTime: {},
+    departureCity: '',
+    daysCount: 0,
+    nightsCount: 0
+  };
 
   constructor(private tourService: TourService,
               private route: ActivatedRoute,
@@ -21,27 +29,10 @@ export class AddtourFormComponent implements OnInit {
               }
 
   ngOnInit() {
-
-    this.tourService.getTour(this.tour.id)
-      .subscribe(v => {
-        this.tour = v;
-      }, err => {
-        if (err.status === 404) {
-          this.router.navigate(['/home']);
-        }
-      });
-
-
-    this.tourService.getTours().subscribe(countries => {
-      console.log('countries', countries);
-      this.countries = countries; });
-  }
-
-  onCountryChange() {
-    console.log('Hotel', this.tour);
-  }
-
-  private populateModels() {
+    this.tour.id = 0;
+    this.tourService.getHotels().subscribe(hotels => {
+      console.log('hotels', hotels);
+      this.hotels = hotels; });
   }
 
   submit() {
@@ -51,15 +42,6 @@ export class AddtourFormComponent implements OnInit {
     } else {
       this.tourService.create(this.tour)
         .subscribe(x => console.log(x));
-    }
-  }
-
-  delete() {
-    if (confirm('Are you sure?')) {
-      this.tourService.delete(this.tour.id)
-        .subscribe(x => {
-          this.router.navigate(['/home']);
-        });
     }
   }
 

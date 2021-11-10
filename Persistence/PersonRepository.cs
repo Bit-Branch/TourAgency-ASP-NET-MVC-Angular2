@@ -22,7 +22,8 @@ namespace TourAgency.Persistence
 
         public async Task<List<Person>> GetPeople()
         {
-            return await context.People.ToListAsync();
+            return await context.People
+            .Include(h => h.Sales).ToListAsync();
         }
 
         public Task<Person> GetPerson(int id, bool includeRelated = true)

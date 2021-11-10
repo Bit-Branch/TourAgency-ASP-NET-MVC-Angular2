@@ -30,5 +30,70 @@ namespace TourAgency.Controllers
             var countries = await repository.GetCountries();
             return mapper.Map<List<Country>, List<CountryResource>>(countries);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCountry(int id)
+        {
+            var country = await repository.GetCountry(id);
+
+            if (country == null)
+              return NotFound();
+
+            var countryResource = mapper.Map<Country, CountryResource>(country);
+
+            return Ok(countryResource);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCountry([FromBody] CountryResource countryResource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var country = mapper.Map<CountryResource, Country>(countryResource);
+
+            repository.Add(country);
+            await unitOfWork.CompleteAsync();
+
+            country = await repository.GetCountry(country.Id);
+
+            var result = mapper.Map<Country, CountryResource>(country);
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateCountry(int id, [FromBody] CountryResource coutryResource)
+    {
+      if (!ModelState.IsValid)
+        return BadRequest(ModelState);
+
+      var country = await repository.GetCountry(id);
+
+      if (country == null)
+        return NotFound();
+
+      mapper.Map<CountryResource, Country>(coutryResource, country);
+
+      await unitOfWork.CompleteAsync();
+
+      country = await repository.GetCountry(country.Id);
+      var result = mapper.Map<Country, CountryResource>(country);
+
+      return Ok(result);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteCountry(int id)
+    {
+      var country = await repository.GetCountry(id);
+
+      if (country == null)
+        return NotFound();
+
+      repository.Remove(country);
+      await unitOfWork.CompleteAsync();
+
+      return Ok(id);
+    }
     }
 }

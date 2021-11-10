@@ -31,5 +31,72 @@ namespace TourAgency.Controllers
             
             return mapper.Map<List<Tour>, List<TourResource>>(tours);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTour(int id)
+        {
+            var tour = await repository.GetTour(id);
+
+            if (tour == null)
+              return NotFound();
+
+            var hotelResource = mapper.Map<Tour, TourResource>(tour);
+
+            return Ok(hotelResource);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> CreateTour([FromBody] SaveTourResource tourResource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            var tour = mapper.Map<SaveTourResource, Tour>(tourResource);
+
+            repository.Add(tour);
+            await unitOfWork.CompleteAsync();
+
+            tour = await repository.GetTour(tour.Id);
+
+            var result = mapper.Map<Tour, TourResource>(tour);
+            return Ok(result);
+        }
+
+        
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateHotel(int id, [FromBody] SaveTourResource tourResource)
+    {
+      if (!ModelState.IsValid)
+        return BadRequest(ModelState);
+
+      var tour = await repository.GetTour(id);
+
+      if (tour == null)
+        return NotFound();
+
+      mapper.Map<SaveTourResource, Tour>(tourResource, tour);
+
+      await unitOfWork.CompleteAsync();
+
+      tour = await repository.GetTour(tour.Id);
+      var result = mapper.Map<Tour, TourResource>(tour);
+
+      return Ok(result);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTour(int id)
+    {
+      var tour = await repository.GetTour(id);
+
+      if (tour == null)
+        return NotFound();
+
+      repository.Remove(tour);
+      await unitOfWork.CompleteAsync();
+
+      return Ok(id);
+    }
     }
 }

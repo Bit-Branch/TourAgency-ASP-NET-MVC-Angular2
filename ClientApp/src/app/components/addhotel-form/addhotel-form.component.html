@@ -22,7 +22,7 @@
 
   <div class="form-group">
     <label for="country">Country</label>
-    <select id="country" class="form-control" (change)="onCountryChange()" [(ngModel)]="hotel.countryId"  name="countryId" required #countryId="ngModel">
+    <select id="country" class="form-control" [(ngModel)]="hotel.countryId"  name="countryId" required #countryId="ngModel">
       <option *ngFor="let c of countries" value="{{ c.id }}">{{ c.name }}</option>
     </select>
     <div class="alert alert-danger" *ngIf="countryId.touched && !countryId.valid">Please specify the country.</div>
@@ -34,7 +34,5 @@
     <div class="alert alert-danger" *ngIf="description.touched && !description.valid">Please specify the description.</div>
   </div>
 
-  <button type="submit" class="btn btn-primary">Savevv</button>
-
-  <button *ngIf="hotel.id" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
+  <button type="submit" class="btn btn-primary">Save</button>
 </form>

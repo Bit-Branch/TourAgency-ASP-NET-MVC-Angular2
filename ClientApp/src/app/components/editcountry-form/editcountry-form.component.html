@@ -1,0 +1,12 @@
+<h1>Edit Country</h1>
+
+<form (ngSubmit)="submit()" novalidate>
+
+  <div class="form-group">
+    <label for="countryName">Name</label>
+    <input id="countryName" type="text" class="form-control" [(ngModel)]="country.name" name="countryName" required #countryName="ngModel">
+    <div class="alert alert-danger" *ngIf="countryName.touched && !countryName.valid">Please specify the country name.</div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Edit</button>
+</form>

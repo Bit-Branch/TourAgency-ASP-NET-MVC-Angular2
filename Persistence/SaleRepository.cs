@@ -22,7 +22,17 @@ namespace TourAgency.Persistence
 
         public async Task<List<Sale>> GetSales()
         {
-            return await context.Sales.ToListAsync();
+            return await context.Sales
+            .Include(h => h.Person)
+            .Include(v => v.Tour).ToListAsync();
+        }
+
+        public async Task<Sale> GetSale(int id)
+        {
+            return await context.Sales
+                .Include(h => h.Person)
+                .Include(v => v.Tour)
+                .SingleOrDefaultAsync(v => v.Id == id);
         }
 
         public void Remove(Sale sale)

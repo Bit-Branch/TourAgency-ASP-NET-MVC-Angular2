@@ -1,0 +1,27 @@
+<h1>{{hotel.name}}</h1>
+<form  novalidate>
+
+  <div class="form-group">
+    <label for="hotelName"><b>Hotel Name</b></label>
+    <p>{{hotel.name}}</p>
+  </div>
+
+  <div class="form-group">
+    <label for="hotelType"><b>Type</b></label>
+        <p>{{hotel.type}}</p>
+    </div> 
+
+  <div class="form-group">
+    <label for="country"><b>Country</b></label>
+    <p>{{hotel.country.name}}</p>
+     </div> 
+
+  <div class="form-group">
+    <label for="description"><b>Description</b></label>
+    <p>{{hotel.description}}</p>
+     </div>
+
+  <button *ngIf="hotel.id" class="btn btn-primary" type="button" (click)="edit()">Edit</button>
+
+  <button *ngIf="hotel.id" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
+</form>

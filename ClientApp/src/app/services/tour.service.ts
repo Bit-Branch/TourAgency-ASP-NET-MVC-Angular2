@@ -20,6 +20,10 @@ export class TourService {
       .pipe(map((res: any) => res));
   }
 
+  getHotels() {
+    return this.httpClient.get('/api/hotels').pipe(map((res: any) => res));
+  }
+
   create(tour) {
     return this.httpClient.post(this.toursEndpoint, tour).pipe(map((res: any) => res));
   }

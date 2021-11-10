@@ -1,4 +1,4 @@
-<h2>Sales</h2>
+<h2>Tours</h2>
 
 
 <table class="table">
@@ -21,12 +21,15 @@
   </thead>
   <tbody>
     <tr *ngFor="let t of tours">
-      <td>{{ t.id }}</td>
-      <td>{{ t.tour.name }}</td>
-      <td>{{ t.price }}</td>
-      <td>{{ t.saleTime }}</td>
+      <td>{{ t.name }}</td>
+      <td>{{ t.price }}</td> 
+      <td>{{ t.departureCity }}</td>
+      <td>{{ t.departureTime }}</td>
+      <td>{{ t.hotel.name }}</td>
+      <td>{{ t.daysCount }}</td>
+      <td>{{ t.nightsCount }}</td>
       <td>
-        <a [routerLink]="['/sales/', v.id]">View</a>
+        <a [routerLink]="['/tours/', t.id]">View</a>
       </td>
     </tr>
   </tbody>

@@ -6,7 +6,7 @@ namespace TourAgency.Core
 {
     public interface ITourRepository
     {
-        Task<Tour> GetTour(int id, bool includeRelated = true);
+        Task<Tour> GetTour(int id);
 
         void Add(Tour tour);
 

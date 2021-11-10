@@ -9,5 +9,9 @@ namespace TourAgency.Core
         Task<Country> GetCountry(int id, bool includeRelated = true);
 
         Task<List<Country>> GetCountries();
+
+        void Add(Country country);
+
+        void Remove(Country country);
     }
 }

@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
-using TourAgency.Core.Models;
 
 namespace TourAgency.Controllers.Resources
 {
-    public class TourResource
+    public class SaveTourResource
     {
        public int Id { get; set; }
 
@@ -20,8 +18,6 @@ namespace TourAgency.Controllers.Resources
 
        public int NightsCount { get; set; }
 
-        public HotelResource Hotel {get;set;}
-
-       public ICollection<SaleResource> Sales { get; set; }
+       public int HotelId {get;set;}
     }
 }

@@ -22,11 +22,11 @@
   <tbody>
     <tr *ngFor="let t of hotels">
       <td>{{ t.id }}</td>
-      <td>{{ t.tour.name }}</td>
-      <td>{{ t.price }}</td>
-      <td>{{ t.saleTime }}</td>
+      <td>{{ t.name }}</td>
+      <td>{{ t.country.name }}</td>
+      <td>{{ t.description }}</td>
       <td>
-        <a [routerLink]="['/sales/', v.id]">View</a>
+        <a [routerLink]="['/hotels/', t.id]">View</a>
       </td>
     </tr>
   </tbody>

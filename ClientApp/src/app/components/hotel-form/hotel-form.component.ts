@@ -3,12 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HotelService } from 'src/app/services/hotel.service';
 
 @Component({
-  selector: 'app-edithotel-form',
-  templateUrl: './edithotel-form.component.html',
-  styleUrls: ['./edithotel-form.component.css']
+  selector: 'app-hotel-form',
+  templateUrl: './hotel-form.component.html',
+  styleUrls: ['./hotel-form.component.css']
 })
-export class EdithotelFormComponent implements OnInit {
-  countries: any[];
+export class HotelFormComponent implements OnInit {
   hotel: any = {};
 
   constructor(private hotelService: HotelService,
@@ -29,22 +28,23 @@ export class EdithotelFormComponent implements OnInit {
           this.router.navigate(['/home']);
         }
       });
-
-      this.hotelService.getCountries().subscribe(countries =>
-        this.countries = countries);
   }
 
-  submit() {
+  edit() {
     if (this.hotel.id) {
-      this.hotelService.update(this.hotel)
-        .subscribe(x => console.log(x));
+      this.router.navigate([`/hotels/edit/${this.hotel.id}`]);
+    } else {
+      this.router.navigate(['/home']);
     }
   }
 
-  cancel() {
+  delete() {
     if (confirm('Are you sure?')) {
-          this.router.navigate(['/hotels']);
-        }
+      this.hotelService.delete(this.hotel.id)
+        .subscribe(x => {
+          this.router.navigate(['/home']);
+        });
+    }
   }
 
 }

@@ -1,5 +1,5 @@
 
-
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -34,16 +34,26 @@ namespace TourAgency.Controllers
             return mapper.Map<List<Hotel>, List<HotelResource>>(hotels);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetHotel(int id)
+        {
+            var hotel = await repository.GetHotel(id);
+
+            if (hotel == null)
+              return NotFound();
+
+            var hotelResource = mapper.Map<Hotel, HotelResource>(hotel);
+
+            return Ok(hotelResource);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> CreateHotel([FromBody] HotelResource hotelResource)
+        public async Task<IActionResult> CreateHotel([FromBody] SaveHotelResource hotelResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            Debug.WriteLine("Creaate hotel" + hotelResource.Name.ToString());
-
-            
-            var hotel = mapper.Map<HotelResource, Hotel>(hotelResource);
+            var hotel = mapper.Map<SaveHotelResource, Hotel>(hotelResource);
 
             repository.Add(hotel);
             await unitOfWork.CompleteAsync();
@@ -54,8 +64,8 @@ namespace TourAgency.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateHotel(int id, [FromBody] HotelResource hotelResource)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateHotel(int id, [FromBody] SaveHotelResource hotelResource)
     {
       if (!ModelState.IsValid)
         return BadRequest(ModelState);
@@ -65,7 +75,7 @@ namespace TourAgency.Controllers
       if (hotel == null)
         return NotFound();
 
-      mapper.Map<HotelResource, Hotel>(hotelResource, hotel);
+      mapper.Map<SaveHotelResource, Hotel>(hotelResource, hotel);
 
       await unitOfWork.CompleteAsync();
 
@@ -78,7 +88,7 @@ namespace TourAgency.Controllers
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteHotel(int id)
     {
-      var hotel = await repository.GetHotel(id, includeRelated: false);
+      var hotel = await repository.GetHotel(id);
 
       if (hotel == null)
         return NotFound();

@@ -22,11 +22,12 @@
   <tbody>
     <tr *ngFor="let t of sales">
       <td>{{ t.id }}</td>
-      <td>{{ t.name }}</td>
-      <td>{{ t.price }}</td>
-      <td>{{ t.departureCity }}</td>
+      <td>{{ t.person.name }}</td>
+      <td>{{ t.tour.price }}</td>
+      <td>{{ t.count }}</td>
+      <td>{{ t.saleTime }}</td>
       <td>
-        <a [routerLink]="['/sales/', v.id]">View</a>
+        <a [routerLink]="['/sales/', t.id]">View</a>
       </td>
     </tr>
   </tbody>

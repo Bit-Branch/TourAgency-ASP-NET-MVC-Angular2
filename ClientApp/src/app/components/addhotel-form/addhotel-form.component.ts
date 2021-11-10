@@ -10,7 +10,6 @@ import { Hotel } from '../../models/tourAgencyModels';
 })
 export class AddhotelFormComponent implements OnInit {
   countries: any[];
-  hotels: any[];
   hotel: any = {
     id: 0,
     name: '',
@@ -29,30 +28,9 @@ export class AddhotelFormComponent implements OnInit {
 
   ngOnInit() {
     this.hotel.id = 0;
-
-    this.hotelService.getHotel(this.hotel.id)
-      .subscribe(v => {
-        this.hotel = v;
-      }, err => {
-        if (err.status === 404) {
-          this.router.navigate(['/home']);
-        }
-      });
-
-
     this.hotelService.getCountries().subscribe(countries => {
       console.log('countries', countries);
       this.countries = countries; });
-  }
-
-  onCountryChange() {
-    console.log('Hotel', this.hotel);
-  }
-
-  private populateModels() {
-    this.hotelService.getHotels().subscribe(hotels => {
-      this.hotels = hotels;
-    });
   }
 
   submit() {
@@ -62,15 +40,6 @@ export class AddhotelFormComponent implements OnInit {
     } else {
       this.hotelService.create(this.hotel)
         .subscribe(x => console.log(x));
-    }
-  }
-
-  delete() {
-    if (confirm('Are you sure?')) {
-      this.hotelService.delete(this.hotel.id)
-        .subscribe(x => {
-          this.router.navigate(['/home']);
-        });
     }
   }
 

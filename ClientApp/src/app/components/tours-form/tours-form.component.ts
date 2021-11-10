@@ -16,25 +16,27 @@ export class ToursFormComponent implements OnInit {
     pageSize: this.PAGE_SIZE
   };
   columns = [
-    { title: 'Id' },
     { title: 'Tour Name', key: 'tourName', isSortable: true },
     { title: 'Price', key: 'price', isSortable: true },
-    { title: 'DepartureCity', key: 'departureCity', isSortable: true },
+    { title: 'Departure City', key: 'departureCity', isSortable: true },
+    { title: 'Departure Time', key: 'departureTime', isSortable: true },
+    { title: 'Hotel', key: 'hotel', isSortable: true },
+    { title: 'Days Count', key: 'daysCount', isSortable: true },
+    { title: 'Nights Count', key: 'nightsCount', isSortable: true },
     { }
   ];
 
   constructor(private tourService: TourService) { }
 
   ngOnInit() {
-    this.tourService.getTours()
-      .subscribe(tours => this.tours = tours);
-
     this.populateTours();
   }
 
   private populateTours() {
-   /* this.tourService.getTours(this.query)
-      .subscribe(result => this.queryResult = result);*/
+    this.tourService.getTours()
+      .subscribe(tours => {
+        console.log('tours', tours);
+      this.tours = tours; });
   }
 
   onFilterChange() {

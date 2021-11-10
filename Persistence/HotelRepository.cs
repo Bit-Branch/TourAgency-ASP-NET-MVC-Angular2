@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -17,14 +18,12 @@ namespace TourAgency.Persistence
 
         public void Add(Hotel hotel)
         {
+            Console.WriteLine(hotel.Name);
             context.Hotels.Add(hotel);
         }
 
-        public async Task<Hotel> GetHotel(int id, bool includeRelated = true)
+        public async Task<Hotel> GetHotel(int id)
         {
-            if (!includeRelated)
-            return await context.Hotels.FindAsync(id);
-
             return await context.Hotels
                 .Include(h => h.Country)
                 .Include(v => v.Tours)
@@ -33,7 +32,9 @@ namespace TourAgency.Persistence
 
         public async Task<List<Hotel>> GetHotels()
         {
-            return await context.Hotels.ToListAsync();
+            return await context.Hotels
+            .Include(h => h.Country)
+            .Include(v => v.Tours).ToListAsync();
         }
 
         public void Remove(Hotel hotel)

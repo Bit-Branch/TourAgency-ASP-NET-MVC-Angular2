@@ -1,15 +1,15 @@
+import { TourService } from 'src/app/services/tour.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TourService } from 'src/app/services/tour.service';
 
 @Component({
-  selector: 'app-edittour-form',
-  templateUrl: './edittour-form.component.html',
-  styleUrls: ['./edittour-form.component.css']
+  selector: 'app-tour-form',
+  templateUrl: './tour-form.component.html',
+  styleUrls: ['./tour-form.component.css']
 })
-export class EdittourFormComponent implements OnInit {
+export class TourFormComponent implements OnInit {
+
   tour: any = {};
-  hotels: any[];
 
   constructor(private tourService: TourService,
               private route: ActivatedRoute,
@@ -24,28 +24,32 @@ export class EdittourFormComponent implements OnInit {
     this.tourService.getTour(this.tour.id)
       .subscribe(v => {
         this.tour = v;
+        console.log('tour', v);
       }, err => {
         if (err.status === 404) {
           this.router.navigate(['/home']);
         }
       });
-
-      this.tourService.getHotels().subscribe(hotels =>
-        this.hotels = hotels);
   }
 
-  submit() {
+  edit() {
     if (this.tour.id) {
-      this.tourService.update(this.tour)
-        .subscribe(x => console.log(x));
+      this.router.navigate([`/tours/edit/${this.tour.id}`]);
+    } else {
+      this.router.navigate(['/home']);
     }
   }
 
-  cancel() {
+  delete() {
     if (confirm('Are you sure?')) {
-          this.router.navigate(['/tours']);
-        }
+      this.tourService.delete(this.tour.id)
+        .subscribe(x => {
+          this.router.navigate(['/home']);
+        });
+    }
   }
 
+  buyTour() {
+  }
 
 }
