@@ -9,7 +9,7 @@ using TourAgency.Core;
 using TourAgency.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace TourAgency
 {
@@ -38,7 +38,7 @@ namespace TourAgency
 
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
-         /*   services.AddAuthentication(options =>
+            services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -46,7 +46,7 @@ namespace TourAgency
             {
                 options.Authority = "https://dev-tpr8uqzh.us.auth0.com/";
                 options.Audience = "https://api.touragency.com";
-            });*/
+            });
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
@@ -78,9 +78,9 @@ namespace TourAgency
                 app.UseSpaStaticFiles();
             }
 
-           // app.UseAuthentication();
+            app.UseAuthentication();
 
-           /* app.UseMvc(routes =>
+          /*  app.UseMvc(routes =>
             {
                 routes.MapRoute(
                 name: "default",

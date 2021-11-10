@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthModule } from '@auth0/auth0-angular';
+
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -24,6 +26,8 @@ import { TourFormComponent } from './components/tour-form/tour-form.component';
 import { AddcountryFormComponent } from './components/addcountry-form/addcountry-form.component';
 import { CountriesFormComponent } from './components/countries-form/countries-form.component';
 import { EditcountryFormComponent } from './components/editcountry-form/editcountry-form.component';
+import { AuthButtonComponent } from './services/auth.service';
+import { UserProfileComponent } from './services/user.info.service';
 
 @NgModule({
   declarations: [
@@ -46,10 +50,10 @@ import { EditcountryFormComponent } from './components/editcountry-form/editcoun
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-   /* AuthModule.forRoot({
+    AuthModule.forRoot({
       domain: 'dev-tpr8uqzh.us.auth0.com',
       clientId: '513ok9kNzkyWhpEFaafW9K45gC9SAFOT'
-    }),*/
+    }),
     HttpClientModule,
     FormsModule,
     CommonModule,
@@ -76,7 +80,7 @@ import { EditcountryFormComponent } from './components/editcountry-form/editcoun
       { path: '**', redirectTo: 'home' }
     ])
   ],
-  providers: [TourService, HotelService],
+  providers: [TourService, HotelService, AuthButtonComponent, UserProfileComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

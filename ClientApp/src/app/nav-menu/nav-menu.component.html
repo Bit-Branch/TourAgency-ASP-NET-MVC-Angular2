@@ -71,14 +71,36 @@
           </li>
 
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a><!-- <a class="nav-link text-dark" (click)="auth.loginWithPopup()" *ngIf="!auth.authenticated()"> -->
+            <a class="nav-link text-dark" (click)="auth.logout({ returnTo: document.location.origin })" *ngIf="auth.isAuthenticated$ | async; else loggedOut"> 
+              <span class="glyphicon glyphicon-user"></span> Logout</a>
+
+
+        <!-- <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+            <button (click)="auth.logout({ returnTo: document.location.origin })">
+              Log out
+            </button>
+          </ng-container>--> 
+          </li>
+      
+          <li #loggedOut class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" (click)="auth.loginWithRedirect()"> 
+              <span class="glyphicon glyphicon-user"></span> Login</a>
+
+        <!-- <ng-template #loggedOut>
+            <button (click)="auth.loginWithRedirect()">Log in</button>
+          </ng-template>-->
+        </li>
+
+       <!--   <li class="nav-item" [routerLinkActive]="['link-active']">
+            
+             <a class="nav-link text-dark" (click)="auth.loginWithRedirect()"> 
               <span class="glyphicon glyphicon-user"></span> Login</a>
           </li>
 
           <li class="nav-item" [routerLinkActive]="['link-active']">
-           <a> <!-- <a class="nav-link text-dark" (click)="auth.logout()" *ngIf="auth.authenticated()"> -->
+            <a class="nav-link text-dark" (click)="auth.logout()" *ngIf="auth.authenticated()"> 
               <span class="glyphicon glyphicon-user"></span> Logout</a>
-          </li>
+          </li>-->
         
         </ul>
       </div>
